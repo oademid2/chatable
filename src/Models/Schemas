@@ -1,0 +1,15 @@
+export class Room{
+
+    constructor(roomID, roomCode, roomName, adminID) { 
+        this.roomID = roomID;
+        this.roomCode = roomCode;
+        this.roomName = roomName;
+        this.adminID = adminID;
+        this.timeStamp = ""
+        this.type = "temporary"
+       
+       
+    }
+
+
+}

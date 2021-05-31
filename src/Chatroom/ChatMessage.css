@@ -1,0 +1,147 @@
+.chat-message-view{
+    margin:15px 0px;
+    padding: 0px 20px;
+    min-width: 100%;
+    max-width: 100%;
+    position: relative;
+    min-height: 20px;
+}
+
+
+.chat-message-text-view{
+    width: 90%;
+    background-color: rgb(246, 246, 246);
+    padding: 8px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+
+.user .chat-message-text-view{
+    margin-left:15%;
+    background-color: rgb(164, 225, 253);
+
+
+}
+
+.chat-message-text-view .header{
+    position: relative;
+}
+
+.username-text{
+    padding: 0px 0px 0px 0px;
+    font-weight: bold;
+    margin:0px;
+    font-size:11px;
+    display: inline-block;
+    width: auto;
+}
+
+.show-reaction-button{
+    padding: 2px 0px;
+    margin:0px;
+    font-size:18px;
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-left: auto;
+}
+
+.user .show-reaction-button{
+
+    
+}
+.options-left-view{
+    width:10%;
+    position: relative;
+    display: inline-block;
+    font-size:25px;
+    padding: 0 0 0 10px;
+    color: rgb(175, 175, 175);
+}
+.reaction-bar{
+    padding: 2px 0px;
+    margin:0px;
+    font-size:10px;
+    position: relative;
+    display: block;
+    float: right;
+    margin-left: auto;
+}
+
+.reaction-emoji{
+    padding: 0 0px;
+}
+.reaction-count{
+    padding: 0px 3px;
+}
+.reaction-tracking{
+    padding:3px;
+}
+
+.reaction-options{
+    padding: 0px 5px;
+    background-color: white;
+    border-radius: 10px;
+    border: 0.5px solid rgb(212, 209, 209);
+    white-space: nowrap;
+    position: absolute;
+    top:8px;
+    right:-15px;
+    z-index: 1;
+}
+
+.reaction-options .option{
+    padding: 0px 6px;
+    font-size: 20px;
+    text-align: bottom;
+}
+
+.reaction-options.cshow{
+    max-width: 500px;
+    border: 0.5px solid rgb(212, 209, 209);
+    transition: all 0.5s ease;
+    overflow:hidden;
+}
+
+.reaction-options.chide{
+    max-width: 0px;
+    max-width: 0px;
+    padding: 0px 0px;
+    border: 0 solid rgb(212, 209, 209);
+    overflow:hidden;
+    transition: all 0.1s ease;
+    
+}
+
+.chat-message-text{
+
+
+    border-radius: 12px;
+    display: inline-block;
+    width: auto;
+    font-family: Helvetica, Arial, sans-serif;
+
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0px 0px;
+    margin:0px;
+
+    word-wrap:break-word;
+
+}
+
+
+
+
+
+
+
+
+
+.report-user-button{
+    color: rgb(255, 29, 29);
+
+}
+

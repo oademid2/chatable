@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+.app-title{
+  text-align: center;
+  padding: 5px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:lighter;
+  font-size: 10px;
+  border-bottom: 0px solid rgb(211, 210, 210);
+  margin:0;
+  max-height: 3vh;
+
+}
+
+.app-body{
+  background-color: none;
+  display: flex;
+  overflow-y: scroll;
+  padding: 0;
+  min-height: 87vh;
+  max-height: 87vh;
+  min-width: 100%;
+  background-color: #61dafb;
+  background-color: white;
+}
+
+
+
+

@@ -1,0 +1,107 @@
+
+.topics-root{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+
+    max-width: 100%;
+    min-height: 85%;
+    height: 85%;
+    min-width: 100%;
+    min-width: 100%;
+    overflow: scroll;
+    overflow-x: visible;
+}
+
+.page-root{
+    max-width:100vw;
+    min-height: 87vh;
+    height: 87vh;
+    padding: 0 8%;
+}
+
+.header-div{
+    height:15%;
+    display: flex;
+}
+
+.header-title{
+    font-family:  Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.header-button{
+    height: 40px;
+    padding: 6px;
+    border-radius: 8px;
+    border: none;
+    background-color: aqua;
+    margin-left: auto ;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.topic-card{
+    position: relative;
+    margin:8px;
+
+    text-align: left;
+    min-width: 98%;
+    max-width: 98%;
+    max-height: 130px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5);
+;
+
+
+
+}
+
+.topic-card-image-view{
+    display: flex;
+    width:30%;
+
+    text-align: center;
+    justify-content: center;
+    padding-top: 4px;
+}
+
+.topic-card-image-view img{
+    max-height:70%;
+    margin: auto;
+}
+
+.topic-card-content-view{
+    display: inline-block;
+
+    padding: 8px 8px;
+    width: 67%;
+
+
+}
+
+.card-title{
+    font-size: 12px;
+    font-weight: bolder;
+}
+.card-text{
+    font-size: 11px!important;
+    position: relative;
+    display: block;
+    margin: 0px;
+}
+.text-muted{
+    margin: 0px !important;
+}
+
+.timeline{
+    max-width: 100%;
+    height:67vh;
+}
