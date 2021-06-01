@@ -43,6 +43,32 @@ class FirebaseUtil  {
 
     }
 
+    static async findRoomById(roomID){
+
+        let room;
+        await chatroomsDB.doc(roomID).get().then((doc) => {
+
+            console.log(doc)
+            if(doc){
+                 room =doc.data()
+                 room.roomID = doc.id
+            }
+        })
+
+        return room
+        
+    }
+
+    static timeStamp(){
+        console.log("Timestamped: ",firebase.firestore.FieldValue.serverTimestamp())
+        return firebase.firestore.FieldValue.serverTimestamp()
+   }
+
+   static async sendMessage(newMessageData, roomID){
+        let newMessageDataRef = await  chatroomsDB.doc(roomID).collection("messages").doc()
+        newMessageDataRef.set({...newMessageData, id:newMessageDataRef.id})
+    }
+
 }
 
 

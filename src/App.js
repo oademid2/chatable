@@ -41,13 +41,13 @@ function App() {
 
       <div className="app-body">
         
-      <AnimatedSwitch >
+      <Switch >
 
           <Route  path='/c' component={()=><Topic/> }></Route>
           <Route  path='/' component={()=><Chatroom/> }></Route>
 
 
-      </AnimatedSwitch>
+      </Switch>
 
       </div>
       <BottomNavigation

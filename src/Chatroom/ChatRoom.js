@@ -3,7 +3,6 @@ import './chatroom.css';
 
 //Third party imports
 import React from 'react';
-import io from 'socket.io-client';
 import autosize from "autosize";
 import { Modal} from 'antd';
 import { FaTelegramPlane, FaWizardsOfTheCoast } from "react-icons/fa";
@@ -11,10 +10,11 @@ import { withRouter} from 'react-router-dom';
 
 //custom imports
 import ChatMessage from './ChatMessage';
-import SocketManager from './Socket'
 import  UserService  from '../Services/UserService.js';
+
+//Data models
 //import Message from '../Models/MessageModel'
-import User from '../Models/UserModel';
+//import User from '../Models/UserModel';
 import { firebase, firestore, FirebaseUtil } from '../Services/FirebaseUtil';
 
 
@@ -29,23 +29,26 @@ class Chat extends React.Component{
         super(props)
 
         this.state = {
-            room: null,
-            user: null,
-            isAdmin: "",
-            newMessage: "",
-            messages: [],
-            status: "",
-            messageOptionsIsVisible: false,
-            render:false
+            room: null, //information about which chat room this is
+            user: null, //information about user logged in
+            isAdmin: "", //*TODO: information on if user is admin -- to remove and use function to check
+            newMessage: "", //state for message form
+            messages: [], //messages to be shown
+            status: "", //status of page
+            messageOptionsIsVisible: false, //??
+            render:false, //render page,
+            roomID: "IIqkSHjF1BvrLHrq4OuX"
         }
 
+        //html variables
+        this.textarea = <textarea/> //set textarea ahead so we can call autosize function before render
+        this.messagesEnd = <div/> //creating div to put at bottom of messages to allow for autoscroll
+
         ////bind functions
-        this.textarea = <textarea/>
-        this.messagesEnd = <div/>
         this.showModal = this.showModal.bind(this)
-        this.removeMessage =this.removeMessage.bind(this)
-        this.onAddReaction = this.onAddReaction.bind(this)
-        this.showMessageOptions = this.showMessageOptions.bind(this)
+        this.removeMessage =this.removeMessage.bind(this) //allows a message to be reported
+        this.onAddReaction = this.onAddReaction.bind(this) //user clicks a reaction to add
+        this.showMessageOptions = this.showMessageOptions.bind(this) //toggle options that can be take on message to show
 
         //other variables
         this.MaxMessageLength = 140;
@@ -56,51 +59,37 @@ class Chat extends React.Component{
 
     componentDidMount(){
 
-        let room;
+        let room = {};
 
-        //query parameters to find the room that has been selected
-        this.queryParams = this.queryParameters(this.props.history.location.search)
-        if(!this.queryParams){
-            this.setState({render:true, status: "404"})
-            return 
-        }else if (!this.queryParams.room){
-            this.setState({render:true, status: "404"})
-            return 
-        }
-
+ 
         ( async() => {
 
-            /////find room
-            if(this.props.location.state) room = this.props.location.state.room
-            else room = await FirebaseUtil.findRoomById(this.queryParams.room)
+            
+            //Get the room
 
-            //TODO: handle redirects/prompts
+            //get url parameters -- status 404 if not found
+            this.queryParams = this.queryParameters(this.props.history.location.search) ;
+            this.queryParams.roomID = "IIqkSHjF1BvrLHrq4OuX"
+            if(!this.queryParams.roomID) return this.setState({render:true, status: "404"});
+            
+            //get room from ID -- status 404 if not found
+            room = await FirebaseUtil.findRoomById(this.queryParams.roomID)
+            if(!room) return this.setState({render:true, status: "404"});
 
-            //if room not found then render a 404 page
-            if(!room){
-                this.setState({render:true, status: "404"})
-                this.setState({render: true})
-                return
-            }
+            
+       
+            //UserService.setUserID(prompt("Please enter your name", "Harry Potter"))
+            
 
-
-                        
-            //if the user is not logged in then new one...
-            //if they are not authenticated prompt....
             if(!UserService.isLoggedIn()){
-                /*this.props.history.push({
-                    pathname: '/joinroom',
-                    search: "",
-                    state: { room: room}
-                })
-                return*/
+                //TODO
             }
 
             //set state with new values
             
             this.setState({
                 room: room,
-                user: {userName: UserService.userName(), userID: UserService.token() },
+                user: {userName: UserService.userName(), userID: UserService.getUserID() },
                 isAdmin: room.adminID == UserService.getUserID(),
                 newMessage: "",
                 messages: [],
@@ -113,8 +102,8 @@ class Chat extends React.Component{
 
             this.room = room;
             
-            //set up message listener
-            this.messagesRef = FirebaseUtil.firestore.collection('chatrooms').doc(this.queryParams.room).collection("messages");
+            //set up message listener for messages
+            this.messagesRef = FirebaseUtil.firestore.collection('chatrooms').doc(this.queryParams.roomID).collection("messages");
             this.query = this.messagesRef.orderBy('createdAt').limit(25)
             this.unsubscribeMessages = this.query.onSnapshot(querySnapshot => {
                 const data = querySnapshot.docs.map(doc => ({
@@ -125,8 +114,6 @@ class Chat extends React.Component{
             })
 
             console.log("this room is: ", room)
-
-
             autosize(this.textarea);
 
 
@@ -175,7 +162,7 @@ class Chat extends React.Component{
         //create message
         let newMessageData = {
             roomCode: this.state.room.roomCode,
-            roomID: this.queryParams.room,
+            roomID: this.state.room.roomID,
             message :  this.state.newMessage,
             userName : this.state.user.userName,
             userToken : UserService.getUserID(),
@@ -183,34 +170,28 @@ class Chat extends React.Component{
             createdAt : FirebaseUtil.timeStamp(),
             reactions : []
         }
-        await FirebaseUtil.sendMessage(newMessageData, this.queryParams.room)
+
+        console.log(this.state.room.roomID)
+        console.log(this.state)
+        await FirebaseUtil.sendMessage(newMessageData, this.state.room.roomID)
         this.set("newMessage", "")
     }
 
-    endRoom(){
-        this.setState({status: "exit"})
-    }
-
-    leaveRoom(){
-        this.props.history.push("/")
-    }
+    endRoom(){this.setState({status: "exit"})}
+    leaveRoom(){this.props.history.push("/")}
 
     removeUser(msg){
        
         
     }
     
-    exitClosedRoom(){
-        this.props.history.push("/")
-    }
+    exitClosedRoom(){this.props.history.push("/")}
 
     removeMessage(msg){
         
     }
 
-    onAddReaction(emoji, msg){
-        FirebaseUtil.addReacton(msg, emoji)
-    }
+    onAddReaction(emoji, msg){FirebaseUtil.addReacton(msg, emoji)}
 
     closeMessageOptions(){
         this.setState({modalVisible: false})
@@ -218,25 +199,21 @@ class Chat extends React.Component{
         this.setState({messageOptionsIsVisible: false})
     }
 
+    showMessageOptions(msg){this.setState({messageOptionsIsVisible: true})}
 
-    showMessageOptions(msg){
-        this.setState({messageOptionsIsVisible: true})
-    }
+    scrollToBottom = () => {this.messagesEnd.scrollIntoView({ behavior: "smooth" });}
 
-    scrollToBottom = () => {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-      }
     componentDidUpdate(prevState, currState) {
         //console.log(prevState, currState)
         if(this.state.render && this.state.status =="200")this.scrollToBottom();
       }
 
-      showModal(state,data=null){
-          console.log(state)
-          this.setState({modal: {state:state, data:data}})
-          this.setState({modalVisible: true})
-          
-      }
+    showModal(state,data=null){
+        console.log(state)
+        this.setState({modal: {state:state, data:data}})
+        this.setState({modalVisible: true})
+    }
+
   
     render(){
 

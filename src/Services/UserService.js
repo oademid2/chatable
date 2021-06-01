@@ -5,7 +5,7 @@ class UserService  {
 
 
     static user = {
-        userName:"",
+        userName:"TEST",
         userID:""
     }
 

@@ -2,13 +2,12 @@
     width: 100%;
     min-height: 100vw;
     max-height:100%;
-    min-height: 87vh;
-    max-height: 87vh;
+    min-height: 97vh;
+    max-height: 97vh;
     min-width: 100%;
     height: 97vh;
 
     position: relative;
-    background-color: aquamarine;
 
 
 
@@ -49,8 +48,8 @@ p{
     display: inline-block;
     background-color: none;
     width:100%;
-    min-height:10%;
-    max-height: 10%;;
+    min-height:9%;
+    max-height: 9%;;
 
 
 }
@@ -142,8 +141,8 @@ p{
     background-color: rgb(235, 237, 238);
     background-color: rgb(147, 213, 237);
     padding:10px 12px;
-    min-height: 15%;
-    max-height: 15%;
+    min-height: 16%;
+    max-height: 16%;
     position: relative;
 
 
