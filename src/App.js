@@ -3,6 +3,7 @@ import './App.css';
 
 import Topic from './Topics/Topics'
 import Chatroom from './Chatroom/ChatRoom'
+import Join from './Join/JoinRoom'
 
 
 import{ useState, useEffect} from 'react';
@@ -42,9 +43,10 @@ function App() {
       <div className="app-body">
         
       <Switch >
-
-          <Route  path='/c' component={()=><Topic/> }></Route>
           <Route  path='/' component={()=><Chatroom/> }></Route>
+          <Route  path='/' component={Join}></Route>
+          <Route  path='/c' component={()=><Topic/> }></Route>
+
 
 
       </Switch>

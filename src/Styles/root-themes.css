@@ -1,0 +1,54 @@
+
+.root-container{
+    min-width: 100vw;
+    min-height: 97vh;
+}
+.root-theme-button-sm{
+        font-size: 18px;
+        background-color: rgb(0, 174, 255);
+        color: #ffffff;
+        border-radius: 12px;
+        border: none;
+        padding: 10px 20px
+}
+
+.root-theme-button-med{
+    font-size: 24px;
+    background-color: rgb(0, 174, 255);
+    color: #ffffff;
+    border-radius: 12px;
+    border: none;
+    padding: 10px 20px
+}
+
+.root-theme-button-lg{
+    font-size: 18px;
+    background-color: rgb(0, 174, 255);
+    color: #ffffff;
+    border-radius: 12px;
+    border: none;
+    padding: 10px 20px
+}
+
+.root-theme-bg-dark-blue{
+    background-color: rgb(14, 74, 102);
+}
+
+.root-theme-100-width{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.root-theme-left{
+    margin-right: auto;
+}
+
+.root-theme-push-bottom{
+    margin-top: auto;
+}
+
+
+.root-theme-push-top{
+    margin-bottom: auto;
+}
+

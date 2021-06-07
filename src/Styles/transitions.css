@@ -1,0 +1,57 @@
+.slide-enter {
+  transform: translateX(100vw);
+  opacity: 1;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Declare transition properties */
+.slide-enter.slide-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: linear 300ms;
+  z-index: 10;
+}
+
+/* EXIT TRANSITION */
+.slide-exit {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide-exit.slide-exit-active {
+  transform: translateX(0vw);
+  opacity: 1;
+  /*transition: 300ms linear;*/
+  z-index: 1;
+}
+
+.right-enter {
+  transform: translateX(-100vw);
+  opacity: 1;
+  position: absolute;
+  z-index: 10;
+}
+
+/* Declare transition properties */
+.right-enter.right-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: linear 300ms;
+  z-index: 10;
+}
+
+/* EXIT TRANSITION */
+.right-exit {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 1;
+}
+
+.right-exit.right-exit-active {
+  transform: translateX(0vw);
+  opacity: 1;
+  /*transition: 300ms linear;*/
+  z-index: 1;
+}

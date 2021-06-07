@@ -60,7 +60,6 @@ class Chat extends React.Component{
     componentDidMount(){
 
         let room = {};
-
  
         ( async() => {
 
@@ -238,7 +237,7 @@ class Chat extends React.Component{
             */ }
         {this.state.isAdmin?
                 <span onClick={()=>this.showModal("end-room")}class="leave-text">end</span>:
-                <span onClick={this.leaveRoom.bind(this)} class="leave-text">leave</span>
+                <span onClick={this.leaveRoom.bind(this)} class="leave-text">X</span>
         }
 
        
@@ -275,6 +274,7 @@ class Chat extends React.Component{
                             </div>
                          
                         <div class="typed-message-view">
+                            <div className="typed-message-input-div">
                             <textarea
                                 class="typed-message-input"
                                 ref={c => (this.textarea = c)}
@@ -284,13 +284,16 @@ class Chat extends React.Component{
                                 onChange={this.updateNewMessage.bind(this) }
                                 class="typed-message-input"
                                 />
-            
+                            </div>
+                            <div className="typed-message-options-div">
                             
                                 <i class="material-icons send-message-btn" 
                                     onClick={this.sendMessage.bind(this)}
                                 ><FaTelegramPlane/></i>
                                 <span className="character-count">{this.state.newMessage.length}/{this.MaxMessageLength}</span>
+                            
                             </div>
+                        </div>
                 
                         <Modal  width="80%" visible={this.state.modalVisible}  onCancel={this.closeMessageOptions.bind(this)} footer={null}>
                             <div className="message-info-modal">

@@ -69,6 +69,26 @@ class FirebaseUtil  {
         newMessageDataRef.set({...newMessageData, id:newMessageDataRef.id})
     }
 
+    static async findRoomByCode(code){
+
+        let room = {}
+        await chatroomsDB.where("roomCode", "==", code)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                room = doc.data();
+                console.log(doc.data())
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+        console.log(room)
+        return room
+        
+    }
+
 }
 
 

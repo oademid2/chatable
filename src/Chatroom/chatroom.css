@@ -1,11 +1,12 @@
 .chatroom-root{
     width: 100%;
-    min-height: 100vw;
+
     max-height:100%;
     min-height: 87vh;
     max-height: 87vh;
     min-width: 100%;
-    height: 97vh;
+    width: 100%;
+    height: 100%;
 
     position: relative;
     background-color: aquamarine;
@@ -39,7 +40,7 @@ p{
 
 .title-view{
     margin: 0;
-    padding: 10px 0;
+    padding: 10px 20px;
     border-bottom: 0px solid rgb(162, 161, 161);
     /*display: flex;
     flex-direction: row;
@@ -50,7 +51,8 @@ p{
     background-color: none;
     width:100%;
     min-height:10%;
-    max-height: 10%;;
+    max-height: 10%;
+    background-color: blueviolet;
 
 
 }
@@ -61,6 +63,7 @@ p{
 }
 
 .subtitle-text{
+    background-color: aqua;
     padding: 0px;
     margin: 0px;
     text-align: center;
@@ -68,12 +71,14 @@ p{
 
 }
 .title-leave-btn{
+ 
     padding: 8px 12px;
     font-size: 13px;
     margin-left: 14px;
     background-color: rgb(255, 29, 29);
     color: white;
     font-weight: bold;
+
     
     border-radius: 6px;
     border: "none";
@@ -84,6 +89,10 @@ p{
 
 }
 
+.title-view-item{
+
+}
+
 .leave-text{
     position: absolute;             /* new */
     display: inline-block;
@@ -91,11 +100,13 @@ p{
     margin-right: 30px;
     height: auto;
     color: rgb(255, 29, 29);
+    background-color: black;
 
     font-size: 16px;
     font-weight: bold;
 }
 .title-text{
+    background-color: aqua;
     font-family: Helvetica, Arial, sans-serif;
     text-align: center;
     font-size: 16px;
@@ -106,6 +117,8 @@ p{
     display: inline-block;
     left: 50%;
     transform: translateX(-50%);
+    width: 70%;
+
 
     font-weight: bolder;
 
@@ -140,19 +153,37 @@ p{
 .typed-message-view{
     border-top: 0px solid gray;
     background-color: rgb(235, 237, 238);
-    background-color: rgb(147, 213, 237);
+    background-color: rgb(50, 81, 93);
     padding:10px 12px;
     min-height: 15%;
     max-height: 15%;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.typed-message-input-div{
+    width: 80%;
+    background-color: rgb(164, 108, 24);
     position: relative;
 
-
-    
 }
+.typed-message-options-div{
+    width: 20%;
+    background-color: blanchedalmond !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: flex-end;
+    overflow: hidden;
+    max-height: 100%;
+}
+
 .typed-message-input{
     margin: none;
-    width: 80%;
-    font-size: 14px;
+    width: 100%;
+    font-size: 12px;
     resize: none;
     border: none;
     border-radius: 10px;
@@ -164,20 +195,22 @@ p{
 
 .send-message-btn{
 
-    color:   rgb(23, 98, 179);
+    color: rgb(23, 98, 179);
+    background-color: rgb(111, 54, 137);
     border-radius: 10px;
-    padding: 12px;
+    padding: 0px 6px !important;
     margin-left: 5px;
-    font-size: 20px;
-    position: absolute;
-    margin-top:auto;
-
+    font-size: 26px;
+    height: auto;
+    flex-grow: 0;
 }
 
 .character-count{
-padding:6px;
-margin-left: 10px;
-font-size: 12px;
+    background-color: blueviolet;
+    padding:2px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 8px;
 }
 
 .message-info-modal{
