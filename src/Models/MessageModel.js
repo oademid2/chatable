@@ -5,7 +5,7 @@ export default class Message{
         this.message = message;
         this.userName = userName;
         this.messageID = id;
-        this.userToken = tkn;
+        this.userID = tkn;
         this.createdAt = timestamp;
         this.reactions = []
         this.reactors = {}

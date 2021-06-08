@@ -2,7 +2,7 @@ export default class User{
 
     constructor(userName, userToken) { 
         this.userName = userName;
-        this.userToken = userToken;
+        this.userID = userToken;
     }
 
 

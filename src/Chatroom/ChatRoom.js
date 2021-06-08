@@ -1,21 +1,24 @@
 //STYLE IMPORTS
 import './chatroom.css';
+import "antd/dist/antd.css"
 
 //Third party imports
 import React from 'react';
 import autosize from "autosize";
-import { Modal} from 'antd';
-import { FaTelegramPlane, FaWizardsOfTheCoast } from "react-icons/fa";
+import { Modal, Button} from 'antd';
+import { FaTelegramPlane, FaArrowLeft, FaWizardsOfTheCoast } from "react-icons/fa";
 import { withRouter} from 'react-router-dom';
 
 //custom imports
 import ChatMessage from './ChatMessage';
 import  UserService  from '../Services/UserService.js';
+import loadingGif from './loading.gif'
 
 //Data models
 //import Message from '../Models/MessageModel'
 //import User from '../Models/UserModel';
 import { firebase, firestore, FirebaseUtil } from '../Services/FirebaseUtil';
+
 
 
 
@@ -81,7 +84,7 @@ class Chat extends React.Component{
             
 
             if(!UserService.isLoggedIn()){
-                //TODO
+                this.setState({promptDisplayname: true})
             }
 
             //set state with new values
@@ -93,10 +96,12 @@ class Chat extends React.Component{
                 newMessage: "",
                 messages: [],
                 status: "200",
+                render:true,
+                displayName: "",
                 messageOptionsIsVisible: false,
                 modalVisible: false,
-                modal:{state:""},
-                render:true
+                modal:{state:""}
+      
             })
 
             this.room = room;
@@ -164,7 +169,7 @@ class Chat extends React.Component{
             roomID: this.state.room.roomID,
             message :  this.state.newMessage,
             userName : this.state.user.userName,
-            userToken : UserService.getUserID(),
+            userID : UserService.getUserID(),
             id : "mid",
             createdAt : FirebaseUtil.timeStamp(),
             reactions : []
@@ -184,6 +189,14 @@ class Chat extends React.Component{
         
     }
     
+    exitRoom(){
+        this.props.history.push("/home")
+        console.log("test")
+    }
+
+    setValue(setter, event){
+        setter(event.target.value)
+     }
     exitClosedRoom(){this.props.history.push("/")}
 
     removeMessage(msg){
@@ -218,8 +231,9 @@ class Chat extends React.Component{
 
         return (
             
+            <>
             <div class="chatroom-root">
-                {!this.state.render? <div>Loading</div>:null}
+                {!this.state.render? <div class="loading-div"><img src={loadingGif}></img></div>:null}
                 {(this.state.render && this.state.status=="404")? <div>STATUS 404</div>:null}
                 {(this.state.render && this.state.status=="exit")? <div>room ended by admin.</div>:null}
                 {(this.state.render && this.state.status=="303")? <div>you've been removed from this room.</div>:null}
@@ -229,8 +243,10 @@ class Chat extends React.Component{
                         <div class="chatroom-view">
                         
                         <div class="title-view">
+
+            <span onClick={this.exitRoom.bind(this)} class="title-back-btn"><FaArrowLeft/></span>
             
-            <span class="title-text">{this.state.room.roomName}</span>
+            <span class="title-text">{this.state.room.roomName}Bachelor in Paradise</span>
             {/*this.state.isAdmin?
                 <p class="title-leave-btn"  onClick={this.endRoom.bind(this)}>end room</p>:
                 <p class="title-leave-btn"  onClick={this.leaveRoom.bind(this)}>leave</p>
@@ -263,7 +279,7 @@ class Chat extends React.Component{
                                     userName={msg.userName } 
                                     reactions = {msg.reactions}
                                     onAddReaction={(emoji=>this.onAddReaction(emoji, msg))}
-                                    isUser={UserService.getUserID()=== msg.userToken }/>)}
+                                    isUser={UserService.getUserID()=== msg.userID }/>)}
                                        <div style={{ float:"left", clear: "both" }}
                                 ref={(el) => { this.messagesEnd = el; }}>
                             </div>
@@ -294,6 +310,8 @@ class Chat extends React.Component{
                             
                             </div>
                         </div>
+
+                
                 
                         <Modal  width="80%" visible={this.state.modalVisible}  onCancel={this.closeMessageOptions.bind(this)} footer={null}>
                             <div className="message-info-modal">
@@ -314,6 +332,8 @@ class Chat extends React.Component{
                         
                         </Modal>
 
+
+
            
                         </div>
                       
@@ -321,9 +341,32 @@ class Chat extends React.Component{
                     :null
                 }
 
+            
+
+                <Modal  
+                    getContainer={true}
+                    width="80%" 
+                    visible={this.state.promptDisplayname}  
+                    onCancel={this.exitRoom.bind(this)} 
+                    cancelText={"exit"}
+                    onOk={() => {
+                        this.setState(
+                            {user: UserService.anonLogin(this.state.displayName),
+                            promptDisplayname: false
+                            })
+                    }}
+                >
+                              <p>Enter a display name:</p>
+                              <input
+                                value={this.state.displayName}
+                                onChange={(event) => this.setState({displayName: event.target.value})}
+                            >
+                            </input>  
+                </Modal>
             </div>
 
 
+            </>
 
 
 

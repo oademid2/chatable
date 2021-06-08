@@ -1,6 +1,7 @@
 import { Redirect, BrowserRouter as Router, Route, Switch, withRouter, useLocation, Link} from 'react-router-dom';
 import HoritzontalCard from './HorizontalCard'
 import React, { useState,  useEffect} from 'react';
+import { useHistory } from "react-router";
 
 
 
@@ -12,6 +13,7 @@ import { FirebaseUtil } from '../Services/FirebaseUtil';
 
 
 function Topics(props) {
+  const history = useHistory()
 
   let location = useLocation();
   const [allRooms, setAllRooms] = useState([])
@@ -27,7 +29,8 @@ function Topics(props) {
 
 
   function onJoinRoom(room){
-
+    console.log(room)
+    history.push("/chat")
   
   }
 
@@ -36,8 +39,8 @@ function Topics(props) {
     <div class="page-root">
 
         <div className="header-div">
-          <h3 className="header-title">TOPICS</h3>
-          <button className="header-button">create new topic</button>
+          <h3 className="header-title">ROOMS</h3>
+          {/*<button className="header-button">create new topic</button>*/}
         </div>
         <div className="topics-root">
         {allRooms.map((room)=>{

@@ -6,12 +6,26 @@ class UserService  {
 
     static user = {
         userName:"TEST",
-        userID:""
+        userID:"0"
     }
 
-    static token(){
-        return this.user.userID
-        //return localStorage.getItem("userID")
+    static isLoggedIn(){
+        if(this.user.status)return true
+        else return false
+    }
+
+    static anonLogin(userName){
+        this.user = {
+            userName: userName,
+            status: "anon",
+            userID:0
+        }
+
+        localStorage.setItem("userName", userName)
+
+        return this.user
+         
+
     }
 
     static getUserID(){
@@ -25,11 +39,14 @@ class UserService  {
     }
 
     static getUser(){
-        
         return this.user;
         //return {userName: localStorage.getItem("userID"), userID: this.token()}
     }
 
+    static token(){
+        return this.user.userID
+        //return localStorage.getItem("userID")
+    }
 
     static user(){
         
@@ -43,10 +60,7 @@ class UserService  {
         //return {userName: localStorage.getItem("userID"), userID: this.token()}
     }
 
-    static isLoggedIn(){
-        //if(localStorage.getItem("userID"))
-        return false
-    }
+
 
     static login(user){
         this.user = {...user} 

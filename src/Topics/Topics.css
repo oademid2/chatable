@@ -48,12 +48,12 @@
 
 .topic-card{
     position: relative;
-    margin:8px;
+    margin:3px;
 
     text-align: left;
     min-width: 98%;
     max-width: 98%;
-    max-height: 130px;
+    max-height: 100px;
     background-color: rgb(255, 255, 255);
     display: flex;
     border-radius: 10px;
@@ -70,19 +70,19 @@
 
     text-align: center;
     justify-content: center;
-    padding-top: 4px;
+    padding-top: 0px;
 }
 
 .topic-card-image-view img{
-    max-height:70%;
+    max-height:60%;
     margin: auto;
 }
 
 .topic-card-content-view{
     display: inline-block;
 
-    padding: 8px 8px;
-    width: 67%;
+    padding: 2px 2px 0px 4px;
+    width: 70%;
 
 
 }
@@ -90,12 +90,16 @@
 .card-title{
     font-size: 12px;
     font-weight: bolder;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 5px;
 }
 .card-text{
-    font-size: 11px!important;
+    font-size: 10px!important;
     position: relative;
     display: block;
     margin: 0px;
+    padding: 0px;
 }
 .text-muted{
     margin: 0px !important;

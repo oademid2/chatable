@@ -10,26 +10,26 @@ import{ useState, useEffect} from 'react';
 
 import {  useHistory, BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { AnimatedRoute, AnimatedSwitch } from 'react-router-transition';
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles';
 
 
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+//import BottomNavigation from '@material-ui/core/BottomNavigation';
+//import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+//import RestoreIcon from '@material-ui/icons/Restore';
+//import FavoriteIcon from '@material-ui/icons/Favorite';
+//import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-const useStyles = makeStyles({
+/*const useStyles = makeStyles({
   root: {
     height: "10vh",
   },
-});
+});*/
 
 
 function App() {
 
   const [activeNavbar, setActiveNavbar] = useState("home") 
-  const classes = useStyles();
+  //const classes = useStyles();
 
 
   return (
@@ -43,16 +43,18 @@ function App() {
       <div className="app-body">
         
       <Switch >
-          <Route  path='/' component={()=><Chatroom/> }></Route>
-          <Route  path='/' component={Join}></Route>
-          <Route  path='/c' component={()=><Topic/> }></Route>
+          <Route  path='/chat' component={()=><Chatroom/> }></Route>
+          <Route  path='/join' component={Join}></Route>
+          <Route  path='/home' component={()=><Topic props/> }></Route>
 
 
 
       </Switch>
 
       </div>
-      <BottomNavigation
+
+      <div class="bottom-nav">
+    {/*  <BottomNavigation
             value={activeNavbar}
             onChange={(event, newValue) => {
               setActiveNavbar(newValue);
@@ -62,7 +64,8 @@ function App() {
             <BottomNavigationAction label="home" icon={<RestoreIcon />} />
             <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
             <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-          </BottomNavigation>
+          </BottomNavigation>*/}
+          </div>
 
 
 
